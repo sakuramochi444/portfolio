@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'TanukiMagic';
+    src: url('./material/TanukiMagic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body { 
+    font-family: 'TanukiMagic', Arial, sans-serif;
+    background-color: #FFF6E8;
+    margin: 0;
+    padding: 20px;
+}
+
+.project {
+    background-color: #eaeaea;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
