@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #1A1B2A;
     color: white;
     position: sticky;
     top: 0;
@@ -26,7 +26,7 @@ header {
     max-width: 100%;
     margin: auto;
     padding: 10px 20px;
-    background-color: black;
+    background-color: #1A1B2A;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,8 +61,93 @@ header {
     color: #FF6347;
 }
 
+h2 {
+    font-size: 50px;
+    text-align: center;
+    color: #1A1B2A;
+    margin-bottom: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-margin-top: 70px;
+}
+
+h2::before, h2::after {
+    content: '';
+    height: 5px;
+    background: linear-gradient(90deg, #1A1B2A, #1A1B2A); 
+    border-radius: 5px;
+    flex-grow: 1; 
+}
+
+h2::before {
+    margin-right: 10px;
+}
+
+h2::after {
+    margin-left: 10px;
+}
+
+#introduction {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+p{
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
+    color: #1A1B2A;
+}
+
+.item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.label {
+    width: 120px;
+    font-weight: bold;
+}
+
+.separator {
+    width: 120px;
+    font-weight: bold;
+}
+
+.value {
+    flex-grow: 1;
+    white-space: nowrap;
+    text-align: left;
+}
+
+#favorite-game .game {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.game-image {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.game-description {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
 footer {
-    background-color: #333;
+    background-color: #1A1B2A;
     color: #fff;
     text-align: center;
     padding: 10px 0;
