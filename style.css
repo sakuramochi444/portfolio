@@ -10,15 +10,17 @@ body {
     background-color: #E6FFE6;
     margin: 0;
     padding: 20px;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 header {
-    background-color: #1A1B2A;
+    background-color: #2a2c46;
     color: white;
     position: sticky;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 96vw;
     z-index: 1000;
 }
 
@@ -26,7 +28,7 @@ header {
     max-width: 100%;
     margin: auto;
     padding: 10px 20px;
-    background-color: #1A1B2A;
+    background-color: #2a2c46;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -64,21 +66,22 @@ header {
 h2 {
     font-size: 50px;
     text-align: center;
-    color: #1A1B2A;
+    color: #2a2c46;
     margin-bottom: 15px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     scroll-margin-top: 70px;
+    white-space: nowrap;
 }
 
 h2::before, h2::after {
     content: '';
     height: 5px;
-    background: linear-gradient(90deg, #1A1B2A, #1A1B2A); 
+    background: linear-gradient(90deg, #2a2c46, #2a2c46); 
     border-radius: 5px;
-    flex-grow: 1; 
+    width: 4000px;
 }
 
 h2::before {
@@ -103,51 +106,111 @@ h2::after {
 
 p{
     line-height: 0.8;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
-    color: #1A1B2A;
+    color: #2a2c46;
 }
 
 .item {
     display: flex;
     margin-bottom: 10px;
+    max-width: 100%;
+    align-items: flex-start;
+}
+
+.label, .separator, .value {
+    line-height: 1.5;
+    padding-top: 2px; 
 }
 
 .label {
-    width: 120px;
+    width: 100px;
     font-weight: bold;
+    flex-shrink: 0;
 }
 
 .separator {
-    width: 120px;
+    width: 50px;
+    text-align: center;
     font-weight: bold;
+    flex-shrink: 0;
 }
 
 .value {
     flex-grow: 1;
-    white-space: nowrap;
+    white-space: normal;
     text-align: left;
+    word-break: break-word;
+    margin: 0;
 }
 
-#favorite-game .game {
+#works .container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#works .work-details {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#works .work-details img {
+    width: 300px;
+    height: auto;
+}
+
+#works .block {
+    flex: 1;
+}
+
+#skills .container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#skills .skills-details {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.game-image {
-    width: 150px;
-    height: auto;
-    border-radius: 8px;
+#skills .skills-details .block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.game-description {
-    font-size: 1rem;
-    line-height: 1.6;
+#skills .skills-details .label {
+    font-weight: bold;
+    font-size: 25px;
+    color: #2a2c46;
+    margin: 0;
+}
+
+#skills .skills-details .value {
+    color: #2a2c46;
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+#skills .skills-details img {
+    width: 170px;
+    height: auto;
+}
+
+#skills .skills-details:nth-child(2) img {
+    margin-left: -10px;
+}
+
+#skills .block {
+    flex: 1;
 }
 
 footer {
-    background-color: #1A1B2A;
+    background-color: #2a2c46;
     color: #fff;
     text-align: center;
     padding: 10px 0;
