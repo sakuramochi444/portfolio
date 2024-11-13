@@ -9,9 +9,12 @@ body {
     font-family: 'TanukiMagic', Arial, sans-serif;
     background-color: #E6FFE6;
     margin: 0;
-    padding: 20px;
     width: 100vw;
     overflow-x: hidden;
+    background-image: url('./material/left.png'), url('./material/right.png');
+    background-position: 50px top, calc(100% - 50px) top;
+    background-size: 300px auto, 300px auto;
+    background-repeat: repeat-y;
 }
 
 header {
@@ -19,10 +22,12 @@ header {
     color: white;
     position: sticky;
     top: 0;
-    width: 96vw;
+    width: 100vw;
     z-index: 1000;
-    margin: 0;
-    padding: 0;
+    max-width: 96vw;
+    margin: 0 auto;
+    padding: 0 2vw;
+    box-sizing: border-box;
 }
 
 .header_inner {
