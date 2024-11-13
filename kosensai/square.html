@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教えあい広場</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/square.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="schedule.html">時間割</a></li>
+                <li><a href="tasks.html">課題リスト</a></li>
+                <li><a href="to_do.html">Todoリスト</a></li>
+                <li><a href="calendar.html">カレンダー</a></li>
+                <li><a href="square.html">教えあい広場</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>教えあい広場</h2>
+
+        <!-- 投稿フォーム -->
+        <div id="postForm">
+            <textarea id="postContent" placeholder="投稿を入力してください..." class="input-field"></textarea>
+            <select id="categorySelect">
+                <option value="">選択してください</option>
+                <option value="数学">数学</option>
+                <option value="国語">国語</option>
+                <option value="社会">社会</option>
+                <option value="理科">理科</option>
+                <option value="英語">英語</option>
+                <option value="その他">その他</option>
+            </select>
+        </div>
+
+        <div class="button-container">
+            <a href="#" class="button" onclick="submitPost()">投稿する</a>
+            <a href="#" class="button" onclick="clearLocalStorage()">全ての投稿を削除</a>
+        </div>
+        
+        <label for="categoryFilter">カテゴリでフィルタリング:</label>
+        <select id="categoryFilter">
+            <option value="全て">全て</option>
+            <option value="数学">数学</option>
+            <option value="国語">国語</option>
+            <option value="社会">社会</option>
+            <option value="理科">理科</option>
+            <option value="英語">英語</option>
+            <option value="その他">その他</option>
+            <option value="未設定">未設定</option>
+        </select>
+        
+        <div id="postList"></div>
+    </main>
+    <script src="js/square.js"></script>
+</body>
+</html>
