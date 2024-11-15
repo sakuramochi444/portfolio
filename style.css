@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
     background-image: url('./material/left.png'), url('./material/right.png');
     background-position: 50px top, calc(100% - 50px) top;
-    background-size: 300px auto, 300px auto;
+    background-size: 280px auto, 280px auto;
     background-repeat: repeat-y;
 }
 
@@ -24,7 +24,7 @@ header {
     top: 0;
     width: 100vw;
     z-index: 1000;
-    max-width: 96vw;
+    max-width: 97vw;
     margin: 0 auto;
     padding: 0 2vw;
     box-sizing: border-box;
@@ -39,6 +39,7 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+
 .header_inner a {
     font-size: 20px;
     text-decoration: none;
@@ -87,7 +88,7 @@ h2::before, h2::after {
     height: 5px;
     background: linear-gradient(90deg, #2a2c46, #2a2c46); 
     border-radius: 5px;
-    width: 4000px;
+    width: 90vw;
 }
 
 h2::before {
@@ -102,6 +103,14 @@ h2::after {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.link > a {
+    color: #FF6347;
+}
+
+.link {
+    margin-top: 10px;
 }
 
 .container {
@@ -211,10 +220,6 @@ p{
     display: flex;
     align-items: flex-start;
     gap: 20px;
-}
-
-#works .link > a {
-    color: #FF6347;
 }
 
 #works .work-details img {
