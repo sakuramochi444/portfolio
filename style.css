@@ -237,6 +237,9 @@ p{
     width: 400px; /* 画像サイズに合わせる */
     height: 300px; /* 画像サイズに合わせる */
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    transition: opacity 1s ease-in-out; /* フェード効果 */
 }
 
 .slide {
@@ -247,12 +250,21 @@ p{
     height: 100%;
     opacity: 0;
     transition: opacity 1s ease-in-out; /* フェード効果 */
+    display: none;
+    width: 100%;
+    height: auto;
 }
 
 .slide.active {
     opacity: 1;
+    display: block;
 }
 
+.slide-group {
+    display: flex;
+    flex-direction: column;
+    transition: opacity 1s ease-in-out; /* フェード効果 */
+}
 
 #skills .container {
     display: flex;

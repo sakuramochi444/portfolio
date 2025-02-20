@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'TanukiMagic';
+    src: url('./material/TanukiMagic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body { 
+    font-family: 'TanukiMagic', Arial, sans-serif;
+    background-color: #E6FFE6;
+    margin: 0;
+    width: 100vw;
+    overflow-x: hidden;
+    background-image: url('./material/left.png'), url('./material/right.png');
+    background-position: 50px top, calc(100% - 50px) top;
+    background-size: 280px auto, 280px auto;
+    background-repeat: repeat-y;
+}
+
+header {
+    background-color: #2a2c46;
+    color: white;
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    z-index: 1000;
+    max-width: 97vw;
+    margin: 0 auto;
+    padding: 0 2vw;
+    box-sizing: border-box;
+}
+
+.header_inner {
+    max-width: 100%;
+    margin: auto;
+    padding: 10px 20px;
+    background-color: #2a2c46;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_inner a {
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.title-logo {
+    font-size: 32px;
+    color: white;
+}
+
+.gnav-list {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    list-style: none;
+}
+
+.gnav-list li {
+    margin-left: 15px;
+}
+
+.gnav-list li a {
+    text-decoration: none;
+    color: white ;
+}
+
+.gnav-list li a:hover {
+    color: #FF6347;
+}
+
+h2 {
+    font-size: 50px;
+    text-align: center;
+    color: #2a2c46;
+    margin-bottom: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-margin-top: 70px;
+    white-space: nowrap;
+}
+
+h2::before, h2::after {
+    content: '';
+    height: 5px;
+    background: linear-gradient(90deg, #2a2c46, #2a2c46); 
+    border-radius: 5px;
+    width: 90vw;
+}
+
+h2::before {
+    margin-right: 10px;
+}
+
+h2::after {
+    margin-left: 10px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+footer {
+    background-color: #2a2c46;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
