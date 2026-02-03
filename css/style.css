@@ -51,8 +51,6 @@ body.dark-mode {
         transform: translateX(0);
     }
     100% {
-        /* 画像1セット分（3枚分+隙間）の距離をマイナス移動 */
-        /* 画像幅 300px * 3枚 + 隙間 1.5rem * 3枚分 */
         transform: translateX(calc(-300px * 3 - 1.5rem * 3));
     }
 }
@@ -78,25 +76,19 @@ body.dark-mode {
 
 /* PCサイズ（画面幅1024px以上）の時だけ表示 */
 @media (min-width: 1024px) {
-    /* 基本の円の設定 */
     .circle {
         position: absolute;
         border-radius: 50%;
         background: var(--accent-gradient);
-        opacity: 0.06; /* 量を増やす分、少し薄くするとメインコンテンツが読みやすいです */
+        opacity: 0.06;
         filter: blur(100px);
         animation: float 20s infinite ease-in-out;
         pointer-events: none;
     }
 
-    /* --- 個別の配置設定 --- */
-    
-    /* 左側エリア */
     .circle-1 { width: 600px; height: 600px; top: -10%; left: -15%; animation-duration: 18s; }
     .circle-2 { width: 400px; height: 400px; top: 40%; left: -10%; animation-duration: 25s; animation-delay: -2s; }
     .circle-3 { width: 500px; height: 500px; top: 80%; left: -5%; animation-duration: 22s; animation-delay: -5s; }
-
-    /* 右側エリア */
     .circle-4 { width: 700px; height: 700px; top: 10%; right: -20%; animation-duration: 30s; }
     .circle-5 { width: 350px; height: 350px; top: 50%; right: -10%; animation-duration: 20s; animation-delay: -7s; }
     .circle-6 { width: 550px; height: 550px; top: 85%; right: -15%; animation-duration: 28s; animation-delay: -3s; }
@@ -162,7 +154,7 @@ h1, h2, h3 {
 
 .slider-container {
     width: 100%;
-    overflow: hidden; /* はみ出た画像を隠す */
+    overflow: hidden;
     background: var(--bg-color);
     border-radius: 12px;
     padding: 1.5rem 0;
@@ -172,12 +164,11 @@ h1, h2, h3 {
 
 .slider-track {
     display: flex;
-    width: max-content; /* 中身の幅に合わせる */
+    width: max-content;
     gap: 1.5rem;
-    animation: scrollInfinite 25s linear infinite; /* 25秒でループ */
+    animation: scrollInfinite 25s linear infinite;
 }
 
-/* マウスホバーで停止 */
 .slider-track:hover {
     animation-play-state: paused;
 }
@@ -192,13 +183,12 @@ h1, h2, h3 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* ------------------ */
+/* --- Skill Grid (アイコン表示制御) --- */
 
-/* Skill Grid */
 .skill-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 1.5rem;
+    gap: 1rem; /* スマホでは隙間を少し詰める */
     margin-top: 1.5rem;
 }
 
@@ -208,36 +198,54 @@ h1, h2, h3 {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 1.2rem;
+    padding: 0.8rem; /* スマホ用パディング */
     background: var(--bg-color);
     border-radius: 12px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
-    height: 130px; /* 全ての高さを固定 */
+    height: auto; /* スマホでは文字の高さに合わせる */
 }
 
-.skill-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-}
-
-/* アイコン自体のサイズと位置を固定 */
+/* スマホではアイコン・画像を非表示 */
 .skill-item i, 
 .skill-item .custom-icon,
-.skill-item .si {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--icon-size-large);
-    height: var(--icon-size-large);
-    font-size: 2.5rem !important;
-    text-align: center;
+.skill-item .si,
+.skill-item img.custom-icon {
+    display: none !important;
 }
 
 .skill-item span {
     font-weight: bold;
     font-size: 0.85rem;
-    margin-top: auto; /* アイコンが小さくても文字位置を下に揃える */
+    text-align: center;
+}
+
+/* PCサイズでの表示（アイコン復活） */
+@media (min-width: 1024px) {
+    .skill-grid {
+        gap: 1.5rem;
+    }
+
+    .skill-item {
+        height: 130px; /* PCでは高さを固定 */
+        padding: 1.2rem;
+    }
+
+    .skill-item i, 
+    .skill-item .custom-icon,
+    .skill-item .si,
+    .skill-item img.custom-icon {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 2.5rem !important;
+    }
+
+    .skill-item span {
+        margin-top: auto;
+    }
 }
 
 /* Work Grid */
@@ -269,53 +277,21 @@ h1, h2, h3 {
 .work-item-block h3 { padding: 1rem 1.5rem 0.5rem; margin: 0; }
 .work-item-block p { padding: 0 1.5rem 1.5rem; font-size: 0.9rem; opacity: 0.8; }
 
-/* 2番目、3番目の遅延設定 */
 .work-item-link:nth-child(2) { animation-delay: 0.2s; }
 .work-item-link:nth-child(3) { animation-delay: 0.4s; }
 
-.work-detail .skill-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 少し小さめに配置 */
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.work-detail .skill-item {
-    padding: 1rem; /* パディングを少し詰める */
-}
-
-/* work.html 用のミニスキルアイコン */
+/* work.html 用のミニスキルアイコン (スマホでは非表示) */
 .mini-skill-icons {
-    padding: 0 1.5rem 1.2rem; /* 説明文(pタグ)とのバランス調整 */
+    padding: 0 1.5rem 1.2rem;
     display: flex;
     gap: 0.8rem;
-    font-size: 1.2rem; /* カード内なので少し控えめなサイズ */
+    font-size: 1.2rem;
 }
 
-.mini-skill-icons i {
-    transition: transform 0.2s ease;
-}
-
-/* カードにホバーした時にアイコンも少し動かす演出（お好みで） */
-.work-item-block:hover .mini-skill-icons i {
-    transform: scale(1.1);
-}
-
-/* アイコンフォントと画像のサイズを合わせる */
-.skill-item img.custom-icon {
-    width: 2.5rem;   /* iタグのfont-sizeと合わせる */
-    height: 2.5rem;
-    object-fit: contain;
-}
-
-/* style.css */
-.skill-item i.fa-brands, 
-.skill-item i.fas {
-    font-size: 2.5rem; /* index.html や project.html 用 */
-    display: block;
-}
-
-.mini-skill-icons i.fa-brands {
-    font-size: 1.2rem; /* work.html のカード内用 */
+@media (max-width: 1023px) {
+    .mini-skill-icons {
+        display: none;
+    }
 }
 
 /* Timeline Section */
