@@ -1,0 +1,380 @@
+@font-face {
+    font-family: 'Mushin';
+    src: url('../font/mushin.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    /* ライトモード変数 */
+    --primary-color: #5a67d8;
+    --text-color: #2a2c46;
+    --bg-color: #f8f9fd;
+    --card-bg: #ffffff;
+    --border-color: #eef0f7;
+    --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --header-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* ダークモード変数 */
+body.dark-mode {
+    --text-color: #e2e8f0;
+    --bg-color: #1a202c;
+    --card-bg: #2d3748;
+    --border-color: #4a5568;
+    --header-bg: rgba(26, 32, 44, 0.95);
+}
+
+/* --- アニメーション定義 --- */
+
+/* 下から上へ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 左から右へ */
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* 右から左へ */
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* 無限ループスライダー用アニメーション */
+@keyframes scrollInfinite {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* 画像1セット分（3枚分+隙間）の距離をマイナス移動 */
+        /* 画像幅 300px * 3枚 + 隙間 1.5rem * 3枚分 */
+        transform: translateX(calc(-300px * 3 - 1.5rem * 3));
+    }
+}
+
+/* JSで制御するための初期状態 */
+.reveal {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.reveal.active {
+    visibility: visible;
+}
+
+.reveal-up.active { animation: fadeInUp 0.8s ease-out forwards; }
+.reveal-left.active { animation: fadeInLeft 0.8s ease-out forwards; }
+.reveal-right.active { animation: fadeInRight 0.8s ease-out forwards; }
+
+/* デフォルトでは非表示（スマホ・タブレット） */
+.bg-decorations {
+    display: none;
+}
+
+/* PCサイズ（画面幅1024px以上）の時だけ表示 */
+@media (min-width: 1024px) {
+    /* 基本の円の設定 */
+    .circle {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--accent-gradient);
+        opacity: 0.06; /* 量を増やす分、少し薄くするとメインコンテンツが読みやすいです */
+        filter: blur(100px);
+        animation: float 20s infinite ease-in-out;
+        pointer-events: none;
+    }
+
+    /* --- 個別の配置設定 --- */
+    
+    /* 左側エリア */
+    .circle-1 { width: 600px; height: 600px; top: -10%; left: -15%; animation-duration: 18s; }
+    .circle-2 { width: 400px; height: 400px; top: 40%; left: -10%; animation-duration: 25s; animation-delay: -2s; }
+    .circle-3 { width: 500px; height: 500px; top: 80%; left: -5%; animation-duration: 22s; animation-delay: -5s; }
+
+    /* 右側エリア */
+    .circle-4 { width: 700px; height: 700px; top: 10%; right: -20%; animation-duration: 30s; }
+    .circle-5 { width: 350px; height: 350px; top: 50%; right: -10%; animation-duration: 20s; animation-delay: -7s; }
+    .circle-6 { width: 550px; height: 550px; top: 85%; right: -15%; animation-duration: 28s; animation-delay: -3s; }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-40px) rotate(10deg); }
+    }
+}
+
+/* ------------------ */
+
+body {
+    font-family: 'Mushin', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+main {
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    color: var(--text-color);
+}
+
+/* About Header */
+.about-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-bottom: 3px solid;
+    border-image: var(--accent-gradient) 1;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.profile-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
+/* Cards & Sections */
+.about, .work, .about-section, .work-detail {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+/* --- 無限ループスライダー --- */
+
+.slider-container {
+    width: 100%;
+    overflow: hidden; /* はみ出た画像を隠す */
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.slider-track {
+    display: flex;
+    width: max-content; /* 中身の幅に合わせる */
+    gap: 1.5rem;
+    animation: scrollInfinite 25s linear infinite; /* 25秒でループ */
+}
+
+/* マウスホバーで停止 */
+.slider-track:hover {
+    animation-play-state: paused;
+}
+
+.slider-track img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ------------------ */
+
+/* Skill Grid */
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.2rem;
+    background: var(--bg-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    height: 130px; /* 全ての高さを固定 */
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* アイコン自体のサイズと位置を固定 */
+.skill-item i, 
+.skill-item .custom-icon,
+.skill-item .si {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--icon-size-large);
+    height: var(--icon-size-large);
+    font-size: 2.5rem !important;
+    text-align: center;
+}
+
+.skill-item span {
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-top: auto; /* アイコンが小さくても文字位置を下に揃える */
+}
+
+/* Work Grid */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.work-item-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.work-item-block {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.work-item-block:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: var(--primary-color);
+}
+
+.work-item-block h3 { padding: 1rem 1.5rem 0.5rem; margin: 0; }
+.work-item-block p { padding: 0 1.5rem 1.5rem; font-size: 0.9rem; opacity: 0.8; }
+
+/* 2番目、3番目の遅延設定 */
+.work-item-link:nth-child(2) { animation-delay: 0.2s; }
+.work-item-link:nth-child(3) { animation-delay: 0.4s; }
+
+.work-detail .skill-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 少し小さめに配置 */
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.work-detail .skill-item {
+    padding: 1rem; /* パディングを少し詰める */
+}
+
+/* work.html 用のミニスキルアイコン */
+.mini-skill-icons {
+    padding: 0 1.5rem 1.2rem; /* 説明文(pタグ)とのバランス調整 */
+    display: flex;
+    gap: 0.8rem;
+    font-size: 1.2rem; /* カード内なので少し控えめなサイズ */
+}
+
+.mini-skill-icons i {
+    transition: transform 0.2s ease;
+}
+
+/* カードにホバーした時にアイコンも少し動かす演出（お好みで） */
+.work-item-block:hover .mini-skill-icons i {
+    transform: scale(1.1);
+}
+
+/* アイコンフォントと画像のサイズを合わせる */
+.skill-item img.custom-icon {
+    width: 2.5rem;   /* iタグのfont-sizeと合わせる */
+    height: 2.5rem;
+    object-fit: contain;
+}
+
+/* style.css */
+.skill-item i.fa-brands, 
+.skill-item i.fas {
+    font-size: 2.5rem; /* index.html や project.html 用 */
+    display: block;
+}
+
+.mini-skill-icons i.fa-brands {
+    font-size: 1.2rem; /* work.html のカード内用 */
+}
+
+/* Timeline Section */
+.timeline {
+    position: relative;
+    padding: 1rem 0 1rem 1.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent-gradient);
+    border-radius: 3px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 1.5rem;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 3px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.timeline-date {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    background: var(--bg-color);
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    border: 1px solid var(--border-color);
+}
+
+.timeline-content h3 { font-size: 1.1rem; margin: 0; color: var(--text-color); }
+.job-title { font-size: 0.85rem; font-weight: 600; color: var(--primary-color); margin: 0.3rem 0; opacity: 0.9; }
+.timeline-content p { font-size: 0.9rem; line-height: 1.5; margin-top: 0.5rem; opacity: 0.8; }
+
+.timeline-item:hover::after {
+    background: var(--primary-color);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Dark mode adjustment for Linux icon */
+body.dark-mode .devicon-linux-plain { color: #fff; }
