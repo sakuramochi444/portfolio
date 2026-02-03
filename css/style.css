@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'Mushin';
-    src: url('../font/mushin.otf') format('opentype');
+    font-family: 'Mainfont';
+    src: url('../font/TanukiMagic.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -102,7 +102,7 @@ body.dark-mode {
 /* ------------------ */
 
 body {
-    font-family: 'Mushin', sans-serif;
+    font-family: 'Mainfont', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
