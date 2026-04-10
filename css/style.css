@@ -7,7 +7,7 @@
 
 :root {
     /* ライトモード変数 */
-    --primary-color: #5a67d8;
+    --primary-color: #1a237e;
     --text-color: #2a2c46;
     --bg-color: #f8f9fd;
     --card-bg: #ffffff;
@@ -23,6 +23,37 @@ body.dark-mode {
     --card-bg: #2d3748;
     --border-color: #4a5568;
     --header-bg: rgba(26, 32, 44, 0.95);
+    /* 全体的なリンクの色を明るい水色系に */
+    --primary-color: #90cdf4; 
+}
+
+body.dark-mode a {
+    color: #90cdf4; /* リンクを読みやすく */
+}
+
+body.dark-mode a:hover {
+    color: #63b3ed;
+}
+
+/* タイムラインの日付バッジの視認性を向上 */
+body.dark-mode .timeline-date {
+    background: #2d3748; /* 背景を少し明るいグレーに */
+    color: #90cdf4;      /* 文字を明るい青に */
+    border-color: #4a5568;
+}
+
+/* タイムラインの役職名 */
+body.dark-mode .job-title {
+    color: #a3bffa; /* 元の濃い青から、明るい青紫色に変更 */
+}
+
+/* タイムラインの左側の線と丸の色調整 */
+body.dark-mode .timeline::before {
+    background: linear-gradient(180deg, #90cdf4 0%, #b794f4 100%);
+}
+
+body.dark-mode .timeline-item::after {
+    border-color: #90cdf4;
 }
 
 /* --- アニメーション定義 --- */
@@ -137,7 +168,7 @@ h1, h2, h3 {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--primary-color);
+    /* border: 3px solid var(--primary-color); */
 }
 
 /* Cards & Sections */
@@ -352,5 +383,25 @@ h1, h2, h3 {
     box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* Dark mode adjustment for Linux icon */
-body.dark-mode .devicon-linux-plain { color: #fff; }
+/* ダークモード時の特定のアイコンを強制的に白く調整 */
+body.dark-mode i.fa-unity,
+body.dark-mode i.devicon-docker-plain,
+body.dark-mode .si-nextdotjs,
+body.dark-mode .devicon-nextjs-plain,
+body.dark-mode .devicon-prisma-plain {
+    /* brightnessを3〜5に上げると、グレーの部分も白く飛びます */
+    filter: grayscale(1) invert(1) brightness(5) !important;
+    background-color: transparent !important;
+}
+
+/* Linuxアイコンを他のアイコンと同じ真っ白にする */
+body.dark-mode i.devicon-linux-plain {
+    filter: grayscale(1) invert(1) brightness(10) contrast(10) !important;
+    opacity: 1 !important;
+}
+
+/* Ensure other icons don't have unwanted filters */
+body.dark-mode i[class*="devicon-"]:not(.devicon-nextjs-plain):not(.devicon-prisma-plain):not(.devicon-linux-plain):not(.devicon-docker-plain),
+body.dark-mode i[class*="fa-"]:not(.fa-unity) {
+    filter: none !important;
+}
