@@ -383,25 +383,24 @@ h1, h2, h3 {
     box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* ダークモード時の特定のアイコンを強制的に白く調整 */
-body.dark-mode i.fa-unity,
-body.dark-mode i.devicon-docker-plain,
-body.dark-mode .si-nextdotjs,
-body.dark-mode .devicon-nextjs-plain,
-body.dark-mode .devicon-prisma-plain {
-    /* brightnessを3〜5に上げると、グレーの部分も白く飛びます */
-    filter: grayscale(1) invert(1) brightness(5) !important;
-    background-color: transparent !important;
+/* --- Skill Icons Color Control --- */
+/* 通常時はすべてのスキルアイコンを黒にする */
+.skill-item i,
+.skill-item .si,
+.skill-item .custom-icon,
+.skill-item img.custom-icon,
+.mini-skill-icons i {
+    color: #000 !important;
+    filter: grayscale(1) brightness(0) !important;
+    transition: all 0.3s ease;
 }
 
-/* Linuxアイコンを他のアイコンと同じ真っ白にする */
-body.dark-mode i.devicon-linux-plain {
-    filter: grayscale(1) invert(1) brightness(10) contrast(10) !important;
-    opacity: 1 !important;
-}
-
-/* Ensure other icons don't have unwanted filters */
-body.dark-mode i[class*="devicon-"]:not(.devicon-nextjs-plain):not(.devicon-prisma-plain):not(.devicon-linux-plain):not(.devicon-docker-plain),
-body.dark-mode i[class*="fa-"]:not(.fa-unity) {
-    filter: none !important;
+/* ダークモード時はすべてのスキルアイコンを白にする */
+body.dark-mode .skill-item i,
+body.dark-mode .skill-item .si,
+body.dark-mode .skill-item .custom-icon,
+body.dark-mode .skill-item img.custom-icon,
+body.dark-mode .mini-skill-icons i {
+    color: #fff !important;
+    filter: grayscale(1) brightness(0) invert(1) !important;
 }
