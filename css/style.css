@@ -35,6 +35,181 @@ body.dark-mode a:hover {
     color: #63b3ed;
 }
 
+/* Archived portfolio notice */
+body.has-update-notice {
+    overflow: hidden;
+}
+
+.update-notice {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(102, 126, 234, 0.2), transparent 35%),
+        radial-gradient(circle at 85% 85%, rgba(118, 75, 162, 0.18), transparent 35%),
+        rgba(19, 22, 42, 0.88);
+    backdrop-filter: blur(14px);
+    animation: noticeFadeIn 0.35s ease-out both;
+}
+
+.update-notice--closing {
+    pointer-events: none;
+    animation: noticeFadeOut 0.25s ease-in both;
+}
+
+.update-notice__card {
+    width: min(100%, 560px);
+    box-sizing: border-box;
+    padding: clamp(2rem, 6vw, 3.5rem);
+    color: #2a2c46;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(5, 8, 28, 0.35);
+    animation: noticeCardIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.update-notice__label {
+    margin: 0 0 0.9rem;
+    color: #667eea;
+    font-family: system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+}
+
+.update-notice__card h1 {
+    margin: 0;
+    color: #20233d;
+    font-size: clamp(1.6rem, 5vw, 2.35rem);
+    line-height: 1.35;
+}
+
+.update-notice__card > p:not(.update-notice__label, .update-notice__url) {
+    margin: 1.25rem 0 2rem;
+    color: #5a5e75;
+    font-family: system-ui, sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.85;
+}
+
+.update-notice__new-link,
+.update-notice__continue {
+    display: flex;
+    width: 100%;
+    min-height: 52px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    border-radius: 999px;
+    font-family: system-ui, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.update-notice__new-link {
+    color: #ffffff;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 12px 25px rgba(102, 126, 234, 0.3);
+}
+
+.update-notice .update-notice__new-link,
+body.dark-mode .update-notice .update-notice__new-link {
+    color: #ffffff;
+}
+
+.update-notice .update-notice__new-link:hover,
+body.dark-mode .update-notice .update-notice__new-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(102, 126, 234, 0.38);
+}
+
+.update-notice__new-link span {
+    font-size: 1.25em;
+    transition: transform 0.2s ease;
+}
+
+.update-notice__new-link:hover span {
+    transform: translateX(3px);
+}
+
+.update-notice__continue {
+    margin-top: 0.75rem;
+    color: #555a71;
+    background: transparent;
+    border: 1px solid #dfe2ed;
+}
+
+.update-notice__continue:hover {
+    color: #34384f;
+    background: #f5f6fb;
+    transform: translateY(-1px);
+}
+
+.update-notice__new-link:focus-visible,
+.update-notice__continue:focus-visible {
+    outline: 3px solid #8ea2ff;
+    outline-offset: 3px;
+}
+
+.update-notice__url {
+    margin: 1.25rem 0 0;
+    color: #8a8da0;
+    font-family: system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+}
+
+@keyframes noticeFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes noticeFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes noticeCardIn {
+    from { opacity: 0; transform: translateY(18px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 480px) {
+    .update-notice {
+        padding: 1rem;
+    }
+
+    .update-notice__card {
+        padding: 2rem 1.3rem;
+        border-radius: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .update-notice,
+    .update-notice--closing,
+    .update-notice__card {
+        animation-duration: 0.01ms;
+    }
+
+    .update-notice__new-link,
+    .update-notice__continue,
+    .update-notice__new-link span {
+        transition: none;
+    }
+}
+
 /* タイムラインの日付バッジの視認性を向上 */
 body.dark-mode .timeline-date {
     background: #2d3748; /* 背景を少し明るいグレーに */

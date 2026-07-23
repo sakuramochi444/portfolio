@@ -1,6 +1,87 @@
 const btn = document.getElementById('darkModeToggle');
 const body = document.body;
 
+// Show an update notice before visitors browse this archived portfolio.
+const noticeDismissedKey = 'legacyPortfolioNoticeDismissed';
+let noticeDismissed = false;
+
+try {
+    noticeDismissed = sessionStorage.getItem(noticeDismissedKey) === 'true';
+} catch (error) {
+    // The notice still works when browser storage is unavailable.
+}
+
+if (!noticeDismissed) {
+    const notice = document.createElement('div');
+    notice.className = 'update-notice';
+    notice.setAttribute('role', 'dialog');
+    notice.setAttribute('aria-modal', 'true');
+    notice.setAttribute('aria-labelledby', 'updateNoticeTitle');
+    notice.setAttribute('aria-describedby', 'updateNoticeDescription');
+    notice.innerHTML = `
+        <div class="update-notice__card">
+            <p class="update-notice__label">PORTFOLIO UPDATE</p>
+            <h1 id="updateNoticeTitle">このポートフォリオは旧版です</h1>
+            <p id="updateNoticeDescription">
+                このページの更新は終了しています。最新の制作実績やプロフィールは、
+                新しいポートフォリオをご覧ください。
+            </p>
+            <a class="update-notice__new-link" href="https://mochi-portfolio.pages.dev">
+                新しいポートフォリオを見る
+                <span aria-hidden="true">→</span>
+            </a>
+            <button class="update-notice__continue" type="button">
+                それでもこのページを見る
+            </button>
+            <p class="update-notice__url">mochi-portfolio.pages.dev</p>
+        </div>
+    `;
+
+    const keepFocusInNotice = (event) => {
+        if (event.key !== 'Tab') {
+            return;
+        }
+
+        const focusableElements = notice.querySelectorAll('a[href], button:not([disabled])');
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+        }
+    };
+
+    const dismissNotice = () => {
+        try {
+            sessionStorage.setItem(noticeDismissedKey, 'true');
+        } catch (error) {
+            // Dismissing remains available without browser storage.
+        }
+
+        notice.classList.add('update-notice--closing');
+        body.classList.remove('has-update-notice');
+        document.removeEventListener('keydown', keepFocusInNotice);
+        notice.addEventListener('animationend', (event) => {
+            if (event.target === notice) {
+                notice.remove();
+            }
+        });
+    };
+
+    body.classList.add('has-update-notice');
+    body.prepend(notice);
+    document.addEventListener('keydown', keepFocusInNotice);
+
+    const newPortfolioLink = notice.querySelector('.update-notice__new-link');
+    const continueButton = notice.querySelector('.update-notice__continue');
+    continueButton.addEventListener('click', dismissNotice);
+    newPortfolioLink.focus();
+}
+
 // 保存されたテーマを適用
 if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-mode');
